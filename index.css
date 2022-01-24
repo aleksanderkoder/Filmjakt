@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.page-container {
+  background-image: url("assets/images/filmcomp.jpg");
+}
+
+.landing-section {
+  height: 100vh;
+  width: 100vw;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  backdrop-filter: grayscale(75%) brightness(30%); 
+}
+
+.logo-container {
+  background: radial-gradient(black, rgba(255, 255, 255, 0));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+.logo {
+  font-family: "Oswald";
+  font-size: 95px;
+  color: white;
+  text-align: center;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.primary-button {
+    font-family: "Oswald";
+    font-size: 35px;
+    background-color: white;
+    color: black;  
+    margin: 10px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.fas {
+    padding-right: 10px;
+}
+
+@keyframes ani-zoom {
+  0% {
+    filter: grayscale(100%);
+  }
+  50% {
+    filter: grayscale(70%);
+  }
+  100% {
+    filter: grayscale(100%);
+  }
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("assets/fonts/Oswald-Regular.ttf");
+}
