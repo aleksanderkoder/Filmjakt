@@ -5,16 +5,17 @@ body {
 
 .page-container {
   background-image: url("assets/images/filmcomp.jpg");
+  font-family: "Oswald";
 }
 
 .landing-section {
-  height: 100vh;
-  width: 100vw;  
   display: flex;
+  height: 100vh;
+  width: 100vw;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  backdrop-filter: grayscale(75%) brightness(30%); 
+  backdrop-filter: grayscale(75%) brightness(30%);
 }
 
 .logo-container {
@@ -25,10 +26,59 @@ body {
   margin-bottom: 100px;
 }
 .logo {
-  font-family: "Oswald";
   font-size: 95px;
   color: white;
   text-align: center;
+}
+
+.primary-button {
+  font-size: 35px;
+  background-color: white;
+  color: black;
+  margin: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dashboard-section {
+  display: none;    /* Hide this initially, set to 'grid' when shown */
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 250px auto;
+  grid-gap: 75px;
+  backdrop-filter: grayscale(75%) brightness(30%);
+  color: white;
+}
+
+.sidebar-section {
+  grid-column: 1;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.content-section {
+  grid-column: 2;
+}
+
+.logo-container-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 50px;
+}
+
+.logo-sidebar {
+  font-size: 35px;
 }
 
 .buttons-container {
@@ -36,28 +86,40 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+  }
 
-.primary-button {
-    font-family: "Oswald";
-    font-size: 35px;
-    background-color: white;
-    color: black;  
-    margin: 10px;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-.primary-button:hover {
+  .button-sidebar {
+    margin-bottom: 25px;
+    font-size: 24px;
+    width: 100%;
+    padding: 5px; 
     color: white;
-    background-color: rgba(0, 0, 0, 0.8); 
-}
+    background-color: transparent;
+    border: none; 
+    cursor: pointer;
+  }
+
+  .button-sidebar:hover {
+      color: black;
+      background-color: white; 
+  }
 
 .fas {
-    padding-right: 10px;
+  padding-right: 10px;
+}
+
+.movie-image {
+    margin-left: 25px; 
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.75);
+    transition: 0.5s; 
+}
+
+.movie-image:hover {
+    transform: scale(1.1);
+}
+
+p {
+    font-size: 45px; 
 }
 
 @keyframes ani-zoom {
