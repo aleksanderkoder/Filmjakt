@@ -19,7 +19,9 @@
     <link rel="stylesheet" href="libs/fontawesome/css/all.min.css" />
   </head>
   <body>
+    <!-- Website page container -->
     <section class="page-container">
+      <!-- LANDING SECTION - This is where users first get sent on website entry -->
       <section
         id="landing"
         class="landing-section animate__animated animate__fadeIn"
@@ -38,7 +40,14 @@
           <i class="fas fa-arrow-right"></i>
         </button>
       </section>
+
+      <!-- DASHBOARD - The main part of the site -->
       <section id="dashboard" class="dashboard-section">
+        <!-- Topbar -->
+        <section class="topbar-section">
+          <span class="logo-topbar" onclick="Navigator.ReturnToDashboard()">UMBRA</span>
+        </section>
+        <!-- Sidebar
         <section
           id="sidebar"
           class="sidebar-section animate__animated animate__slideInLeft"
@@ -53,32 +62,65 @@
           </div>
           <div class="buttons-container">
             <button class="button-sidebar">
-                <i class="fas fa-film"></i>
-                Search Movie</button>
-                <button class="button-sidebar">
-                    <i class="fas fa-film"></i>
-                    Search Series</button>
+              <i class="fas fa-film"></i>
+              Search Movie
+            </button>
             <button class="button-sidebar">
-                <i class="fas fa-user"></i>
-                Search Name</button>
-                <button class="button-sidebar">
-                    <i class="fas fa-film"></i>
-                    Search Reviews?</button>
-            </div>
-        </section>
+              <i class="fas fa-film"></i>
+              Search Series
+            </button>
+            <button class="button-sidebar">
+              <i class="fas fa-user"></i>
+              Search Name
+            </button>
+            <button class="button-sidebar">
+              <i class="fas fa-film"></i>
+              Search Reviews
+            </button>
+          </div>
+        </section> -->
+        <!-- Content section -->
         <section id="content" class="content-section">
-            <div id="in-theaters" class="content-container">
-                <h1>In theaters now</h1>
+          <div id="movie-showcase" class="movie-showcase-container">
+            <i class='fas fa-arrow-left movie-showcase-back' title="Return" onclick="Navigator.ReturnToDashboard()"></i>
+            <div class="movie-showcase-top">
+
+              <img
+                id="movie-showcase-image"
+                class="movie-showcase-image"
+                src=""
+              />
+              <div class="movie-showcase-info-container">
+                <span
+                  id="movie-showcase-header"
+                  class="movie-showcase-header"
+                ></span>
+                <span
+                  id="movie-showcase-info"
+                  class="movie-showcase-info"
+                ></span>
+              </div>
             </div>
-            <div id="most-popular-movies" class="content-container">
-                <h1>Most popular movies</h1>
+            <div
+              id="movie-showcase-stars"
+              class="movie-showcase-stars-container"
+            >
             </div>
-            <div id="most-popular-series" class="content-container">
-                <h1>Most popular TV series</h1>
-            </div>
+          </div>
+          <div id="in-theaters" class="content-container">
+            <h1>In theaters now</h1>
+          </div>
+          <div id="most-popular-movies" class="content-container">
+            <h1>Most popular movies</h1>
+          </div>
+          <div id="most-popular-series" class="content-container">
+            <h1>Most popular TV series</h1>
+          </div>
         </section>
       </section>
     </section>
+
+    <!-- <script src="js/helpers.js" async defer></script> -->
     <script src="js/navigator.js" async defer></script>
     <script src="js/umbra.js" async defer></script>
     <script src="js/index.js" async defer></script>

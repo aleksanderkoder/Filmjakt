@@ -4,7 +4,7 @@ body {
 }
 
 .page-container {
-  background-image: url("assets/images/filmcomp.jpg");
+  background-image: url("assets/images/filmcomp-min.jpg");
   background-size: cover;
   font-family: "Oswald";
   width: 100vw;
@@ -52,80 +52,90 @@ body {
 }
 
 .dashboard-section {
-  display: none;    /* Hide this initially, set to 'grid' when shown */
+  display: none; /* Hide this initially, set to 'grid' when shown */
   width: 100%;
   height: 100%;
-  grid-template-columns: 250px auto;
-  grid-gap: 75px;
-  backdrop-filter: grayscale(85%) brightness(10%);
+  backdrop-filter: grayscale(85%) brightness(20%);
   color: white;
+}
+
+.topbar-section {
+  display: flex;
+  align-items: center;
+  height: 75px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .sidebar-section {
   grid-column: 1;
   grid-column-end: 1;
-  position: fixed; 
-  height: 100vh;
+  grid-row: 2; 
+  position: fixed;
+  height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-right: 1px solid white;
 }
 
 .content-section {
-  grid-column: 2;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-left: 35px;
 }
 
-.logo-container-sidebar {
+/* .logo-container-topbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 25px;
-  margin-bottom: 50px;
-}
+  padding: 10px;
+} */
 
-.logo-sidebar {
+.logo-topbar {
   font-size: 35px;
+  margin-left: 25px;
+  margin-right: 25px;
+  cursor: pointer;
 }
 
-.buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+/* .buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .button-sidebar {
-    margin-bottom: 25px;
-    font-size: 24px;
-    width: 100%;
-    padding: 5px; 
-    color: white;
-    background-color: transparent;
-    border: none; 
-    cursor: pointer;
-  }
-
-  .button-sidebar:hover {
-      color: black;
-      background-color: white; 
-  }
+.button-sidebar {
+  margin-bottom: 25px;
+  font-size: 24px;
+  width: 100%;
+  padding: 5px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+} */
+/* 
+.button-sidebar:hover {
+  color: black;
+  background-color: white;
+} */
 
 .fas {
   padding-right: 10px;
 }
 
 .movie-image {
-    margin-right: 25px; 
-    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.75);
-    transition: 0.5s; 
-    height: 200px;
-    padding-top: 15px;
+  margin-right: 25px;
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.75);
+  transition: 0.5s;
+  height: 200px;
+  padding-top: 15px;
 }
 
-.movie-image:hover {
-    transform: scale(1.1); 
-    cursor: pointer;
+.movie-image:hover, .actor-image:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .content-container {
@@ -137,7 +147,7 @@ body {
   flex-direction: row;
 }
 
-.movie-info {
+.movie-info, .actor-info {
   display: inline-block;
   width: auto;
   margin-right: 15px;
@@ -149,12 +159,71 @@ body {
   display: inline-block;
 }
 
+.movie-showcase-container {
+  margin-top: 35px;
+  display: none;
+  /* justify-content: center; */
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.movie-showcase-header {
+  padding: 25px;
+  font-size: 64px;
+}
+
+.movie-showcase-image {
+  height: 600px;
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.75);
+}
+
+.movie-showcase-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-showcase-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.movie-showcase-info {
+  padding: 0 25px 25px 25px;
+  width: 75%;
+  font-size: 24px;
+}
+
+.movie-showcase-back {
+  font-size: 54px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.movie-showcase-back:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.actor-image {
+  margin-right: 10px;
+  margin-left: 25px;
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.75);
+  transition: 0.5s;
+  height: 150px;
+  padding-top: 15px;
+  
+}
+
+.movie-showcase-stars-container {
+  flex-basis: 100%;
+}
+
 h1 {
-    font-size: 45px; 
+  font-size: 45px;
 }
 
 h1:hover {
-  text-decoration: underline; 
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -173,4 +242,20 @@ h1:hover {
 @font-face {
   font-family: "Oswald";
   src: url("assets/fonts/Oswald-Regular.ttf");
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
