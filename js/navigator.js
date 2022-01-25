@@ -6,11 +6,11 @@ class Navigator {
         document.getElementById("dashboard").style.display = "grid"; 
         // Fetch information from IMDb API to display on Dashboard
         // Get and display movies currently in theaters
-        Umbra.GetMoviesInTheaters(); 
+        Filmjakt.GetMoviesInTheaters(); 
         // Get the currently most popular movies
-        Umbra.GetMostPopularMovies(); 
+        Filmjakt.GetMostPopularMovies(); 
         // Get the most popular TV Series
-        Umbra.GetMostPopularSeries(); 
+        Filmjakt.GetMostPopularSeries(); 
     }
     static DisplayMovieShowcase() {
         document.getElementById("movie-showcase").style.display = "flex"; 
@@ -24,6 +24,20 @@ class Navigator {
         document.getElementById("in-theaters").style.display = "block";
         document.getElementById("most-popular-movies").style.display = "block"; 
         document.getElementById("most-popular-series").style.display = "block";
-        Umbra.ResetShowcase();  
+        Filmjakt.ResetShowcase();  
+        Filmjakt.ResetSearch(); 
+    }
+    static HideDashboardSections() {
+        document.getElementById("in-theaters").style.display = "none";
+        document.getElementById("most-popular-movies").style.display = "none"; 
+        document.getElementById("most-popular-series").style.display = "none";
+    }
+    static HideShowcase() {
+        document.getElementById("movie-showcase").style.display = "none"; 
+    }
+    static DisplaySearchResults() {
+        document.getElementById("search-content").style.display = "block";
+        Navigator.HideDashboardSections();
+        Navigator.HideShowcase();
     }
 }

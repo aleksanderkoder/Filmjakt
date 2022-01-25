@@ -1,4 +1,4 @@
-class Umbra {
+class Filmjakt {
   static apiKey = "k_g0awz7ea";
   static imdbApiUrl = "https://imdb-api.com/en/API/";
 
@@ -19,7 +19,7 @@ class Umbra {
               let imgElement = document.createElement("img");
               imgElement.src = item.image;
               imgElement.addEventListener("click", function () {
-                Umbra.DisplayMovieShowcase(item.id, false);
+                Filmjakt.DisplayMovieShowcase(item.id, false);
               });
               imgElement.className = "movie-image";
               itemWrapper.appendChild(imgElement);
@@ -59,7 +59,7 @@ class Umbra {
               let imgElement = document.createElement("img");
               imgElement.src = item.image;
               imgElement.addEventListener("click", function () {
-                Umbra.DisplayMovieShowcase(item.id);
+                Filmjakt.DisplayMovieShowcase(item.id);
               });
               imgElement.className = "movie-image";
               itemWrapper.appendChild(imgElement);
@@ -107,7 +107,7 @@ class Umbra {
               let imgElement = document.createElement("img");
               imgElement.src = item.image;
               imgElement.addEventListener("click", function () {
-                Umbra.DisplayMovieShowcase(item.id);
+                Filmjakt.DisplayMovieShowcase(item.id);
               });
               imgElement.className = "movie-image";
               itemWrapper.appendChild(imgElement);
@@ -139,10 +139,11 @@ class Umbra {
       });
   }
   static DisplayMovieShowcase(movieID, released = true) {
-    console.log(movieID);
+    Filmjakt.ResetShowcase()
     Navigator.DisplayMovieShowcase();
+    Filmjakt.ResetSearch(); 
 
-    // Fetch movie information from IMDb api and
+    // Fetch movie information from IMDb api 
     fetch(this.imdbApiUrl + "Title/" + this.apiKey + "/" + movieID, {
       method: "get",
     })
@@ -156,20 +157,18 @@ class Umbra {
             document.getElementById("movie-showcase-image").src = item.image;
             let mInfo = "";
             if (item.type == "Movie") {
-                mInfo += item.year;
-                mInfo += " • " + item.runtimeStr;
-                mInfo += "<br><br>" + item.plot;
-              
-                  if(!released) {
-                    mInfo +=
+              mInfo += item.year;
+              mInfo += " • " + item.runtimeStr;
+              mInfo += "<br><br>" + item.plot;
+
+              if (!released) {
+                mInfo +=
                   "<br><br><i class='fas fa-calendar-day'></i> Coming " +
                   item.releaseDate;
-                  } else {
-                    mInfo +=
+              } else {
+                mInfo +=
                   "<br><br><i class='fas fa-star'></i>" + item.imDbRating;
-                  }
-                
-              
+              }
             } else if (item.type == "TVSeries") {
               mInfo =
                 item.year +
@@ -215,5 +214,56 @@ class Umbra {
   }
   static ResetShowcase() {
     document.getElementById("movie-showcase-stars").innerHTML = "";
+    document.getElementById("movie-showcase-image").src = "";
+  }
+  static ResetSearch() {
+    document.getElementById("search-content").innerHTML = "";
+    document.getElementById("search-box").value = "";  
+  }
+  static CreateSlideFromSearch() {
+    let expression = document.getElementById("search-box").value;
+    if (expression == "") return;
+    Filmjakt.ResetSearch();
+    Navigator.DisplaySearchResults();
+    fetch(this.imdbApiUrl + "SearchAll/" + this.apiKey + "/" + expression, {
+      method: "get",
+    })
+      .then((response) => {
+        return response.text().then(function (text) {
+          let data = JSON.parse(text);
+          let searchHeader = document.createElement("h1");
+          searchHeader.innerHTML = "Search results";
+          let contentElem = document.getElementById("search-content");
+          contentElem.appendChild(searchHeader);
+          data.results.forEach((item) => {
+            // Generate wrapper to contain each item
+            let itemWrapper = document.createElement("div");
+            itemWrapper.className = "item-wrapper search";
+            // Generate image element
+            let imgElement = document.createElement("img");
+            imgElement.src = item.image;
+            imgElement.className = "movie-image";
+            itemWrapper.appendChild(imgElement);
+            // Generate info box
+            let infoElement = document.createElement("span");
+            infoElement.className = "movie-info";
+            if (item.resultType == "Name") {
+              infoElement.innerHTML = item.title + "<br>Actor";
+            } else if (item.resultType == "Title") {
+              imgElement.addEventListener("click", function () {
+                Filmjakt.DisplayMovieShowcase(item.id, true);
+              });
+              infoElement.innerHTML = item.title + "<br>Media";
+            }
+            itemWrapper.appendChild(infoElement);
+
+            // Append wrapper element to document
+            document.getElementById("search-content").appendChild(itemWrapper);
+          });
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

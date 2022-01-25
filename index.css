@@ -21,13 +21,13 @@ body {
   backdrop-filter: grayscale(85%) brightness(10%);
 }
 
-.logo-container {
+/* .logo-container {
   background: radial-gradient(black, rgba(255, 255, 255, 0));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 100px;
-}
+} */
 .logo {
   font-size: 95px;
   color: white;
@@ -93,9 +93,13 @@ body {
 
 .logo-topbar {
   font-size: 35px;
-  margin-left: 25px;
+  margin-left: 50px;
   margin-right: 25px;
   cursor: pointer;
+}
+
+.search-content {
+  display: none; 
 }
 
 /* .buttons-container {
@@ -123,6 +127,11 @@ body {
 
 .fas {
   padding-right: 10px;
+}
+
+.search-container {
+  position: absolute;
+  right: 50px;
 }
 
 .movie-image {

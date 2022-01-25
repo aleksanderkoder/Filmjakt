@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Umbra</title>
+    <title>Filmjakt</title>
     <meta name="description" content="An IMDb clone." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -26,14 +26,8 @@
         id="landing"
         class="landing-section animate__animated animate__fadeIn"
       >
-        <div class="logo-container">
-          <img
-            src="assets/images/film-roll-white.png"
-            width="170"
-            height="170"
-          />
-          <span class="logo">UMBRA</span>
-        </div>
+        <img src="assets/images/film-roll-white.png" width="170" height="170" />
+        <span class="logo">Filmjakt</span>
 
         <button class="primary-button" onclick="Navigator.DisplayDashboard()">
           Dashboard
@@ -45,46 +39,29 @@
       <section id="dashboard" class="dashboard-section">
         <!-- Topbar -->
         <section class="topbar-section">
-          <span class="logo-topbar" onclick="Navigator.ReturnToDashboard()">UMBRA</span>
+          <span class="logo-topbar" title="Home" onclick="Navigator.ReturnToDashboard()"
+            >Filmjakt</span
+          >
+          <div class="search-container">
+            <form onSubmit="return false">
+              <i class="fas fa-search"></i>
+            <input id="search-box" type="text" placeholder="Search media or actors..." />
+            <button type="submit" onclick="Filmjakt.CreateSlideFromSearch()" class="search-btn">Search</button>
+            </form>
+            
+          </div>
         </section>
-        <!-- Sidebar
-        <section
-          id="sidebar"
-          class="sidebar-section animate__animated animate__slideInLeft"
-        >
-          <div class="logo-container-sidebar">
-            <img
-              src="assets/images/film-roll-white.png"
-              width="60"
-              height="60"
-            />
-            <span class="logo-sidebar">UMBRA</span>
-          </div>
-          <div class="buttons-container">
-            <button class="button-sidebar">
-              <i class="fas fa-film"></i>
-              Search Movie
-            </button>
-            <button class="button-sidebar">
-              <i class="fas fa-film"></i>
-              Search Series
-            </button>
-            <button class="button-sidebar">
-              <i class="fas fa-user"></i>
-              Search Name
-            </button>
-            <button class="button-sidebar">
-              <i class="fas fa-film"></i>
-              Search Reviews
-            </button>
-          </div>
-        </section> -->
         <!-- Content section -->
         <section id="content" class="content-section">
+          <div id="search-content" class="search-content">
+          </div>
           <div id="movie-showcase" class="movie-showcase-container">
-            <i class='fas fa-arrow-left movie-showcase-back' title="Return" onclick="Navigator.ReturnToDashboard()"></i>
+            <i
+              class="fas fa-arrow-left movie-showcase-back"
+              title="Return"
+              onclick="Navigator.ReturnToDashboard()"
+            ></i>
             <div class="movie-showcase-top">
-
               <img
                 id="movie-showcase-image"
                 class="movie-showcase-image"
@@ -104,17 +81,16 @@
             <div
               id="movie-showcase-stars"
               class="movie-showcase-stars-container"
-            >
-            </div>
+            ></div>
           </div>
           <div id="in-theaters" class="content-container">
-            <h1>In theaters now</h1>
+            <h1>In Theaters Now</h1>
           </div>
           <div id="most-popular-movies" class="content-container">
-            <h1>Most popular movies</h1>
+            <h1>Most Popular Movies</h1>
           </div>
           <div id="most-popular-series" class="content-container">
-            <h1>Most popular TV series</h1>
+            <h1>Most Popular TV Series</h1>
           </div>
         </section>
       </section>
@@ -122,7 +98,7 @@
 
     <!-- <script src="js/helpers.js" async defer></script> -->
     <script src="js/navigator.js" async defer></script>
-    <script src="js/umbra.js" async defer></script>
+    <script src="js/filmjakt.js" async defer></script>
     <script src="js/index.js" async defer></script>
   </body>
 </html>
