@@ -1,54 +1,80 @@
+// Main class
+// Contains all main methods for fetching and displaying information from IMDb API
 class Filmjakt {
+  // API key needed to access the IMDb API
   static apiKey = "k_g0awz7ea";
+  // Base URL for the IMDb API
   static imdbApiUrl = "https://imdb-api.com/en/API/";
 
+  // Fetches and displays current movies in theaters
   static GetMoviesInTheaters() {
+    // Sends HTTP GET request to the IMDb API
     fetch(this.imdbApiUrl + "InTheaters/" + this.apiKey, {
       method: "get",
     })
       .then((response) => {
         return response.text().then(function (text) {
+          // Parse the JSON response to a JS object
           let data = JSON.parse(text);
-          let count = 0;
+          // Check for error message
+          if(!Helpers.CheckForError(data)) {
+            Navigator.ReturnToDashboard();
+            return; 
+          }
+          let count = 0;  // Counts loop iterations
           data.items.forEach((item) => {
+            // Only render 10 items
             if (count < 10) {
-              // Generate wrapper to contain each item
+              // Generate wrapper element to contain each item
               let itemWrapper = document.createElement("div");
               itemWrapper.className = "item-wrapper";
               // Generate movie image element
               let imgElement = document.createElement("img");
               imgElement.src = item.image;
+              // Add onclick event listener to the movie image element
               imgElement.addEventListener("click", function () {
+                // Showcase the clicked movie element 
                 Filmjakt.DisplayMovieShowcase(item.id, false);
               });
               imgElement.className = "movie-image";
               itemWrapper.appendChild(imgElement);
 
-              // Generate info box on hover element
+              // Generate info box
               let infoElement = document.createElement("span");
+              // Append response properties to info box element
               infoElement.innerHTML =
                 item.title + "<br>" + item.year + "<br>" + item.releaseState;
               infoElement.className = "movie-info";
+              // Append info element to item wrapper element
               itemWrapper.appendChild(infoElement);
 
               // Append wrapper element to document
               document.getElementById("in-theaters").appendChild(itemWrapper);
-              count++;
+              count++;  // Increment count of loop iterations
             }
           });
         });
       })
       .catch((error) => {
+        // If HTTP error
         console.log(error);
       });
   }
+  // Fetches and displays the 10 most popular movies
   static GetMostPopularMovies() {
+    // HTTP GET request to IMDb API
     fetch(this.imdbApiUrl + "MostPopularMovies/" + this.apiKey, {
       method: "get",
     })
       .then((response) => {
         return response.text().then(function (text) {
+          // Parse the response JSON to JS object
           let data = JSON.parse(text);
+          // Check for error message
+          if(!Helpers.CheckForError(data)) {
+            Navigator.ReturnToDashboard();
+            return; 
+          }
           let count = 0;
           data.items.forEach((item) => {
             if (count < 10) {
@@ -58,14 +84,18 @@ class Filmjakt {
               // Generate movie image element
               let imgElement = document.createElement("img");
               imgElement.src = item.image;
+              // Add onclick event listener to image element
               imgElement.addEventListener("click", function () {
+                // Showcase the clicked movie
                 Filmjakt.DisplayMovieShowcase(item.id);
               });
               imgElement.className = "movie-image";
+              // Append image element to item wrapper element
               itemWrapper.appendChild(imgElement);
 
-              // Generate info box on hover element
+              // Generate info box
               let infoElement = document.createElement("span");
+              // Append response properties to info box element
               infoElement.innerHTML =
                 item.rank +
                 ".<br>" +
@@ -75,45 +105,60 @@ class Filmjakt {
                 "<br><i class='fas fa-star'></i> " +
                 item.imDbRating;
               infoElement.className = "movie-info";
+              // Append info element to item wrapper element
               itemWrapper.appendChild(infoElement);
 
-              // Append wrapper element to document
+              // Append wrapper element to document DOM
               document
                 .getElementById("most-popular-movies")
                 .appendChild(itemWrapper);
-              count++;
+              count++; // Increment count for loop iterations
             }
           });
         });
       })
       .catch((error) => {
+        // If HTTP error
         console.log(error);
       });
   }
+  // Fetches and displays the 10 most popular TV series from the IMDb API
   static GetMostPopularSeries() {
+    // HTTP GET request to IMDb API
     fetch(this.imdbApiUrl + "MostPopularTVs/" + this.apiKey, {
       method: "get",
     })
       .then((response) => {
         return response.text().then(function (text) {
+          // Parse the response JSON to JS object
           let data = JSON.parse(text);
+          // Check for error message
+          if(!Helpers.CheckForError(data)) {
+            // Return to dashboard if error message exists
+            Navigator.ReturnToDashboard();
+            return; 
+          }
           let count = 0;
           data.items.forEach((item) => {
+            // Render only 10 elements
             if (count < 10) {
               // Generate wrapper to contain each item
               let itemWrapper = document.createElement("div");
               itemWrapper.className = "item-wrapper";
-              // Generate movie image element
+              // Generate series image element
               let imgElement = document.createElement("img");
               imgElement.src = item.image;
+              // Add onclick event listener to image element
               imgElement.addEventListener("click", function () {
                 Filmjakt.DisplayMovieShowcase(item.id);
               });
               imgElement.className = "movie-image";
+              // Append image elemnt to item wrapper element
               itemWrapper.appendChild(imgElement);
 
               // Generate info box on hover element
               let infoElement = document.createElement("span");
+              // Append response properties to info box element
               infoElement.innerHTML =
                 item.rank +
                 ".<br>" +
@@ -123,33 +168,43 @@ class Filmjakt {
                 "<br><i class='fas fa-star'></i> " +
                 item.imDbRating;
               infoElement.className = "movie-info";
+              // Append info element to item wrapper element
               itemWrapper.appendChild(infoElement);
 
-              // Append wrapper element to document
+              // Append wrapper element to document DOM
               document
                 .getElementById("most-popular-series")
                 .appendChild(itemWrapper);
-              count++;
+              count++; // Increment count of loop iterations
             }
           });
         });
       })
       .catch((error) => {
+        // If HTTP error
         console.log(error);
       });
   }
+  // Displays the showcase section and resets showcase and search sections
   static DisplayMovieShowcase(movieID, released = true) {
-    Filmjakt.ResetShowcase()
+    // Reset relevant sections
+    Filmjakt.ResetShowcase();
     Navigator.DisplayMovieShowcase();
-    Filmjakt.ResetSearch(); 
+    Filmjakt.ResetSearch();
 
-    // Fetch movie information from IMDb api 
+    // Fetch movie information from IMDb api
     fetch(this.imdbApiUrl + "Title/" + this.apiKey + "/" + movieID, {
       method: "get",
     })
       .then((response) => {
         return response.text().then(function (text) {
+          // Parse the response JSON to JS object
           let item = JSON.parse(text);
+          // Check for error message
+          if(!Helpers.CheckForError(item)) {
+            Navigator.ReturnToDashboard();
+            return; 
+          }
 
           if (item.id == movieID) {
             document.getElementById("movie-showcase-header").innerHTML =
@@ -195,7 +250,7 @@ class Filmjakt {
             imgElement.className = "actor-image";
             itemWrapper.appendChild(imgElement);
 
-            // Generate info box on hover element
+            // Generate info box
             let infoElement = document.createElement("span");
             infoElement.innerHTML = item.name;
             infoElement.className = "actor-info";
@@ -212,29 +267,47 @@ class Filmjakt {
         console.log(error);
       });
   }
+  // Resets showcase element content
   static ResetShowcase() {
     document.getElementById("movie-showcase-stars").innerHTML = "";
     document.getElementById("movie-showcase-image").src = "";
   }
+  // Resets search element content
   static ResetSearch() {
     document.getElementById("search-content").innerHTML = "";
-    document.getElementById("search-box").value = "";  
+    document.getElementById("search-box").value = "";
   }
+  // Creates a content slide from the search results from the IMDb API
   static CreateSlideFromSearch() {
+    // Get search expression from seach input element
     let expression = document.getElementById("search-box").value;
+    // If search expression is empty, then return early
     if (expression == "") return;
+    // Reset search element content
     Filmjakt.ResetSearch();
+    // Display relevant DOM elements
     Navigator.DisplaySearchResults();
+    // Fetch search results from IMDb API
     fetch(this.imdbApiUrl + "SearchAll/" + this.apiKey + "/" + expression, {
       method: "get",
     })
       .then((response) => {
         return response.text().then(function (text) {
+          // Parse the response JSON to JS object
           let data = JSON.parse(text);
+          // Display back arrow button
+          document.getElementById("arrow-back").style.display = "block";
+          // Check for error message
+          if(!Helpers.CheckForError(data)) {
+            Navigator.ReturnToDashboard();
+            return; 
+          }
+          // Generate relevant DOM elements
           let searchHeader = document.createElement("h1");
           searchHeader.innerHTML = "Search results";
           let contentElem = document.getElementById("search-content");
           contentElem.appendChild(searchHeader);
+          // Loop through every search result item
           data.results.forEach((item) => {
             // Generate wrapper to contain each item
             let itemWrapper = document.createElement("div");
@@ -247,6 +320,7 @@ class Filmjakt {
             // Generate info box
             let infoElement = document.createElement("span");
             infoElement.className = "movie-info";
+            // Generate relevant info based on result type
             if (item.resultType == "Name") {
               infoElement.innerHTML = item.title + "<br>Actor";
             } else if (item.resultType == "Title") {
@@ -263,6 +337,7 @@ class Filmjakt {
         });
       })
       .catch((error) => {
+        // If HTTP error
         console.log(error);
       });
   }

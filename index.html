@@ -45,7 +45,7 @@
           <div class="search-container">
             <form onSubmit="return false">
               <i class="fas fa-search"></i>
-            <input id="search-box" type="text" placeholder="Search media or actors..." />
+            <input id="search-box" class="search-box" type="text" placeholder="Search media or actors..." />
             <button type="submit" onclick="Filmjakt.CreateSlideFromSearch()" class="search-btn">Search</button>
             </form>
             
@@ -53,14 +53,15 @@
         </section>
         <!-- Content section -->
         <section id="content" class="content-section">
+          <i
+            id="arrow-back"
+            class="fas fa-arrow-left arrow-back"
+            title="Return"
+            onclick="Navigator.ReturnToDashboard()"
+          ></i>
           <div id="search-content" class="search-content">
           </div>
           <div id="movie-showcase" class="movie-showcase-container">
-            <i
-              class="fas fa-arrow-left movie-showcase-back"
-              title="Return"
-              onclick="Navigator.ReturnToDashboard()"
-            ></i>
             <div class="movie-showcase-top">
               <img
                 id="movie-showcase-image"
@@ -96,9 +97,8 @@
       </section>
     </section>
 
-    <!-- <script src="js/helpers.js" async defer></script> -->
+    <script src="js/helpers.js" async defer></script>
     <script src="js/navigator.js" async defer></script>
     <script src="js/filmjakt.js" async defer></script>
-    <script src="js/index.js" async defer></script>
   </body>
 </html>

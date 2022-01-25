@@ -131,7 +131,38 @@ body {
 
 .search-container {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   right: 50px;
+  background-color: white;
+  color: black;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px; 
+}
+
+.search-box {
+  background: transparent;
+  border: none; 
+}
+
+.search-btn {
+  border: none;
+  font-family: "Oswald";
+  color: white;
+  font-size: 18px;
+  background-color: black;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.search-btn:hover {
+  background-color: rgb(80, 80, 80);
+}
+
+.search-box:focus {
+  outline: none;
 }
 
 .movie-image {
@@ -202,14 +233,16 @@ body {
   font-size: 24px;
 }
 
-.movie-showcase-back {
+.arrow-back {
+  display: none;
   font-size: 54px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  margin-top: 25px;
   cursor: pointer;
   transition: 0.5s;
 }
 
-.movie-showcase-back:hover {
+.arrow-back:hover {
   color: rgba(255, 255, 255, 0.75);
 }
 
