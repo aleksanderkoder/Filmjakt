@@ -21,20 +21,18 @@ class Filmjakt {
             Navigator.ReturnToDashboard();
             return; 
           }
-          let count = 0;  // Counts loop iterations
-          data.items.forEach((item) => {
+          for (let i = 0; i < 10; i++) {
             // Only render 10 items
-            if (count < 10) {
               // Generate wrapper element to contain each item
               let itemWrapper = document.createElement("div");
               itemWrapper.className = "item-wrapper";
               // Generate movie image element
               let imgElement = document.createElement("img");
-              imgElement.src = item.image;
+              imgElement.src = data.items[i].image;
               // Add onclick event listener to the movie image element
               imgElement.addEventListener("click", function () {
                 // Showcase the clicked movie element 
-                Filmjakt.DisplayMovieShowcase(item.id, false);
+                Filmjakt.DisplayMovieShowcase(data.items[i].id, false);
               });
               imgElement.className = "movie-image";
               itemWrapper.appendChild(imgElement);
@@ -43,16 +41,14 @@ class Filmjakt {
               let infoElement = document.createElement("span");
               // Append response properties to info box element
               infoElement.innerHTML =
-                item.title + "<br>" + item.year + "<br>" + item.releaseState;
+              data.items[i].title + "<br>" + data.items[i].year + "<br>" + data.items[i].releaseState;
               infoElement.className = "movie-info";
               // Append info element to item wrapper element
               itemWrapper.appendChild(infoElement);
 
               // Append wrapper element to document
               document.getElementById("in-theaters").appendChild(itemWrapper);
-              count++;  // Increment count of loop iterations
             }
-          });
         });
       })
       .catch((error) => {
@@ -75,19 +71,17 @@ class Filmjakt {
             Navigator.ReturnToDashboard();
             return; 
           }
-          let count = 0;
-          data.items.forEach((item) => {
-            if (count < 10) {
+          for (let i = 0; i < 10; i++) {
               // Generate wrapper to contain each item
               let itemWrapper = document.createElement("div");
               itemWrapper.className = "item-wrapper";
               // Generate movie image element
               let imgElement = document.createElement("img");
-              imgElement.src = item.image;
+              imgElement.src = data.items[i].image;
               // Add onclick event listener to image element
               imgElement.addEventListener("click", function () {
                 // Showcase the clicked movie
-                Filmjakt.DisplayMovieShowcase(item.id);
+                Filmjakt.DisplayMovieShowcase(data.items[i].id);
               });
               imgElement.className = "movie-image";
               // Append image element to item wrapper element
@@ -97,13 +91,13 @@ class Filmjakt {
               let infoElement = document.createElement("span");
               // Append response properties to info box element
               infoElement.innerHTML =
-                item.rank +
+              data.items[i].rank +
                 ".<br>" +
-                item.title +
+                data.items[i].title +
                 "<br>" +
-                item.year +
+                data.items[i].year +
                 "<br><i class='fas fa-star'></i> " +
-                item.imDbRating;
+                data.items[i].imDbRating;
               infoElement.className = "movie-info";
               // Append info element to item wrapper element
               itemWrapper.appendChild(infoElement);
@@ -111,10 +105,8 @@ class Filmjakt {
               // Append wrapper element to document DOM
               document
                 .getElementById("most-popular-movies")
-                .appendChild(itemWrapper);
-              count++; // Increment count for loop iterations
-            }
-          });
+                .appendChild(itemWrapper);          
+          }
         });
       })
       .catch((error) => {
@@ -138,19 +130,17 @@ class Filmjakt {
             Navigator.ReturnToDashboard();
             return; 
           }
-          let count = 0;
-          data.items.forEach((item) => {
+          for (let i = 0; i < 10; i++) {
             // Render only 10 elements
-            if (count < 10) {
               // Generate wrapper to contain each item
               let itemWrapper = document.createElement("div");
               itemWrapper.className = "item-wrapper";
               // Generate series image element
               let imgElement = document.createElement("img");
-              imgElement.src = item.image;
+              imgElement.src = data.items[i].image;
               // Add onclick event listener to image element
               imgElement.addEventListener("click", function () {
-                Filmjakt.DisplayMovieShowcase(item.id);
+                Filmjakt.DisplayMovieShowcase(data.items[i].id);
               });
               imgElement.className = "movie-image";
               // Append image elemnt to item wrapper element
@@ -160,13 +150,13 @@ class Filmjakt {
               let infoElement = document.createElement("span");
               // Append response properties to info box element
               infoElement.innerHTML =
-                item.rank +
+              data.items[i].rank +
                 ".<br>" +
-                item.title +
+                data.items[i].title +
                 "<br>" +
-                item.year +
+                data.items[i].year +
                 "<br><i class='fas fa-star'></i> " +
-                item.imDbRating;
+                data.items[i].imDbRating;
               infoElement.className = "movie-info";
               // Append info element to item wrapper element
               itemWrapper.appendChild(infoElement);
@@ -175,9 +165,7 @@ class Filmjakt {
               document
                 .getElementById("most-popular-series")
                 .appendChild(itemWrapper);
-              count++; // Increment count of loop iterations
             }
-          });
         });
       })
       .catch((error) => {
@@ -229,7 +217,7 @@ class Filmjakt {
                 item.year +
                 " • TV Series<br><br>" +
                 item.plot +
-                "<br><br><i class='fas fa-star'></i>Rating: " +
+                "<br><br><i class='fas fa-star'></i> " +
                 item.imDbRating;
             }
             document.getElementById("movie-showcase-info").innerHTML = mInfo;
@@ -270,7 +258,7 @@ class Filmjakt {
   // Resets showcase element content
   static ResetShowcase() {
     document.getElementById("movie-showcase-stars").innerHTML = "";
-    document.getElementById("movie-showcase-image").src = "";
+    //document.getElementById("movie-showcase-image").src = "";
   }
   // Resets search element content
   static ResetSearch() {
